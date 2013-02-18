@@ -1,0 +1,5 @@
+
+" activate pathogen. Note, must be before any filetype detection commands!
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
