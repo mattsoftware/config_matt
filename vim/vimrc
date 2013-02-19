@@ -9,6 +9,9 @@ set nocompatible
 " syntax on " this is set later if we have colours
 " set hlsearch " this is set later if we have colours
 set autoindent shiftwidth=4 tabstop=4
+" Allow vim to navigate away from unwritten changes in a buffer without
+" warning
+set hidden
 
 let mapleader = "'"
 " show invisibles
