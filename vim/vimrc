@@ -9,8 +9,11 @@ set nocompatible
 " syntax on " this is set later if we have colours
 " set hlsearch " this is set later if we have colours
 set autoindent shiftwidth=4 tabstop=4
+set number
 
 let mapleader = "'"
+" show line numbers
+nmap <leader>n :set number!<CR>
 " show invisibles
 nmap <leader>l :set list!<CR>
 " strip whitespace from end of lines
@@ -21,7 +24,10 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 "nmap <D-]> >>
 "vmap <D-[> <gv
 "vmap <D-]> >gv
-
+"nmap <C-[> <<
+"nmap <C-]> >>
+"vmap <C-[> <gv
+"vmap <C-]> >gv
 
 " List invisibles
 set listchars=tab:>\ ,eol:$,trail:.
