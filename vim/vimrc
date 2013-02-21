@@ -12,6 +12,10 @@ set autoindent shiftwidth=4 tabstop=4
 set number
 
 let mapleader = "'"
+" 'h = help
+nmap <leader>h :echo "h1 h2"<CR>
+nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix"<CR>
+nmap <leader>h2 :echo "n:number l:invisibles w:whitesapce"<CR>
 " show line numbers
 nmap <leader>n :set number!<CR>
 " show invisibles
@@ -28,6 +32,10 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 "nmap <C-]> >>
 "vmap <C-[> <gv
 "vmap <C-]> >gv
+" Easy paste toggel
+nnoremap <silent> <F6> :set paste!<CR>
+" Change to unix
+nnoremap <silent> <F7> :set fileformat=unix<CR>
 
 " List invisibles
 set listchars=tab:>\ ,eol:$,trail:.
