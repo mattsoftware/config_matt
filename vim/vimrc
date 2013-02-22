@@ -36,6 +36,9 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 nnoremap <silent> <F6> :set paste!<CR>
 " Change to unix
 nnoremap <silent> <F7> :set fileformat=unix<CR>
+" Buffers
+nnoremap <F9> :buffers<CR>:buffer<Space>
+nnoremap <F10> :bn<CR>
 
 " List invisibles
 set listchars=tab:>\ ,eol:$,trail:.
