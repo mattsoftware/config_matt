@@ -9,11 +9,18 @@ set nocompatible
 " syntax on " this is set later if we have colours
 " set hlsearch " this is set later if we have colours
 set autoindent shiftwidth=4 tabstop=4
+set number
 " Allow vim to navigate away from unwritten changes in a buffer without
 " warning
 set hidden
 
 let mapleader = "'"
+" 'h = help
+nmap <leader>h :echo "h1 h2"<CR>
+nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix"<CR>
+nmap <leader>h2 :echo "n:number l:invisibles w:whitesapce"<CR>
+" show line numbers
+nmap <leader>n :set number!<CR>
 " show invisibles
 nmap <leader>l :set list!<CR>
 " strip whitespace from end of lines
@@ -24,7 +31,17 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 "nmap <D-]> >>
 "vmap <D-[> <gv
 "vmap <D-]> >gv
-
+"nmap <C-[> <<
+"nmap <C-]> >>
+"vmap <C-[> <gv
+"vmap <C-]> >gv
+" Easy paste toggel
+nnoremap <silent> <F6> :set paste!<CR>
+" Change to unix
+nnoremap <silent> <F7> :set fileformat=unix<CR>
+" Buffers
+nnoremap <F9> :buffers<CR>:buffer<Space>
+nnoremap <F10> :bn<CR>
 
 " List invisibles
 set listchars=tab:>\ ,eol:$,trail:.
