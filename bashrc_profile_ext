@@ -1,8 +1,0 @@
-
-: ${CONFIG_MATT:="$HOME/config_matt"}
-if [[ -d "$CONFIG_MATT" && -d "$CONFIG_MATT/.git"]]; then
-	pushd "$CONFIG_MATT"
-	git pull
-	popd
-fi
-
