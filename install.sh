@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-
-
 function log() {
 	echo "$1"
 }
+
 function logErr() {
 	log " *** ERROR: $1 ***"
 }
@@ -23,12 +22,37 @@ function createLink() {
 	fi
 }
 
+function fileAppend() {
+	TARGET="$1";shift
+	TEXT="$1";shift
+	if [[ -f "$TARGET" ]]; then
+		# First check to make sure it is not already in the file!
+		grep -Fxq "$TEXT" "$TARGET"
+		if [[ $? == 1 ]]; then
+			echo "$TEXT" >> "$TARGET"
+		fi
+	fi
+}
+
+# .bash_ext
+createLink `pwd`/bashrc_ext ~/.bashrc_ext
+createLink `pwd`/bash_profile_ext ~/.bash_profile_ext
+fileAppend ~/.bashrc "[[ -f ~/.bashrc_ext ]] && . ~/.bashrc_ext"
+fileAppend ~/.bash_profile "[[ -f ~/.bash_profile_ext ]] && . ~/.bash_profile_ext"
+
 # .vim and .vimrc
 createLink `pwd`/vim ~/.vim
 createLink `pwd`/vim/vimrc ~/.vimrc
 
-log "Dont forget to..."
-log "    git submodule init"
-log "    git submodule update"
-
+# initialize the submodules
+OIFS="$IFS"
+IFS=$'\n'
+for x in `git submodule`; do
+	if [[ "$x" =~ ^\- ]]; then
+		SMPATH=$(echo $x | cut -d' ' -f 2)
+		git submodule init $SMPATH
+		git submodule update $SMPATH
+	fi
+done
+IFS="$OIFS"
 
