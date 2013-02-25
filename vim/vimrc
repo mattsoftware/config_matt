@@ -14,11 +14,12 @@ set number
 " warning
 set hidden
 
-let mapleader = "'"
+let mapleader = ";"
 " 'h = help
-nmap <leader>h :echo "h1 h2"<CR>
-nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix"<CR>
+nmap <leader>h :echo "h1 h2 hb"<CR>
+nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix F8:buffers F9:bn"<CR>
 nmap <leader>h2 :echo "n:number l:invisibles w:whitesapce"<CR>
+nmap <leader>hb :echo "F8:buffers F9:bn ctrl-^:switch bd:close"<CR>
 " show line numbers
 nmap <leader>n :set number!<CR>
 " show invisibles
@@ -40,8 +41,8 @@ nnoremap <silent> <F6> :set paste!<CR>
 " Change to unix
 nnoremap <silent> <F7> :set fileformat=unix<CR>
 " Buffers
-nnoremap <F9> :buffers<CR>:buffer<Space>
-nnoremap <F10> :bn<CR>
+nnoremap <F8> :buffers<CR>:buffer<Space>
+nnoremap <F9> :bn<CR>
 
 " List invisibles
 set listchars=tab:>\ ,eol:$,trail:.
