@@ -1,9 +1,12 @@
 
-: ${CONFIG_MATT:="$HOME/config_matt"}
-if [[ -d "$CONFIG_MATT" && -d "$CONFIG_MATT/.git" ]]; then
-	pushd "$CONFIG_MATT" > /dev/null
-	git pull
-	./install.sh
-	popd > /dev/null
+# Mac's run this on every terminal instance - very annoying!
+if [[ $(uname) != 'Darwin' ]]; then
+	: ${CONFIG_MATT:="$HOME/config_matt"}
+	if [[ -d "$CONFIG_MATT" && -d "$CONFIG_MATT/.git" ]]; then
+		pushd "$CONFIG_MATT" > /dev/null
+		git pull
+		./install.sh
+		popd > /dev/null
+	fi
 fi
 
