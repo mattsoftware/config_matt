@@ -16,10 +16,13 @@ set hidden
 
 let mapleader = ";"
 " 'h = help
-nmap <leader>h :echo "h1 h2 hb"<CR>
+nmap <leader>h :echo "h1 h2 hb ht hc"<CR>
 nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix F8:buffers F9:bn"<CR>
 nmap <leader>h2 :echo "n:number l:invisibles w:whitesapce"<CR>
 nmap <leader>hb :echo "F8:buffers F9:bn ctrl-^:switch bd:close"<CR>
+nmap <leader>ht :echo "gt:advance gT:backwards tabedit:new"
+nmap <leader>hc :echo "changes:list g;:back g,:forward jumps:list ctrl-o:backward ctrl-i:forward"
+
 " show line numbers
 nmap <leader>n :set number!<CR>
 " show invisibles
@@ -27,7 +30,7 @@ nmap <leader>l :set list!<CR>
 " strip whitespace from end of lines
 nmap <leader>w :call <SID>StripTrailingWhitespaces()<CR>
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
-" tab shortcuts
+" indent shortcuts
 "nmap <D-[> <<
 "nmap <D-]> >>
 "vmap <D-[> <gv
@@ -52,7 +55,8 @@ highlight SpecialKey ctermfg=DarkCyan
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
-
+" Edit helper
+map <leader>ew :e <C-R>=expand("%:p:h") . "/"<CR>
 
 "colorscheme darkblue
 "
