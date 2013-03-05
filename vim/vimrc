@@ -16,10 +16,11 @@ set hidden
 
 let mapleader = ";"
 " 'h = help
-nmap <leader>h :echo "h1 h2 hb ht hc"<CR>
+nmap <leader>h :echo "h1 h2 hb ht hc he"<CR>
 nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix F8:buffers F9:bn"<CR>
 nmap <leader>h2 :echo "n:number l:invisibles w:whitesapce"<CR>
 nmap <leader>hb :echo "F8:buffers F9:bn ctrl-^:switch bd:close"<CR>
+nmap <leader>he :echo ";e:editwindow ;et:edittab ;es:editsplit ;ev:editvirticalsplit"<CR>
 nmap <leader>ht :echo "gt:advance gT:backwards tabedit:new"
 nmap <leader>hc :echo "changes:list g;:back g,:forward jumps:list ctrl-o:backward ctrl-i:forward"
 
@@ -57,6 +58,9 @@ highlight SpecialKey guifg=#4a4a59
 
 " Edit helper
 map <leader>ew :e <C-R>=expand("%:p:h") . "/"<CR>
+map <leader>es :sp <C-R>=expand("%:p:h") . "/"<CR>
+map <leader>ev :vsp <C-R>=expand("%:p:h") . "/"<CR>
+map <leader>et :tabedit <C-R>=expand("%:p:h") . "/"<CR>
 
 "colorscheme darkblue
 "
