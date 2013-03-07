@@ -1,4 +1,4 @@
 
 HISTCONTROL=ignoreboth
-
+alias gp='git pull --no-ff --no-commit'
 
