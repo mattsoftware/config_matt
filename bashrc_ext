@@ -1,4 +1,5 @@
 
 HISTCONTROL=ignoreboth
+HISTTIMEFORMAT='%F %T '
 alias gp='git pull --no-ff --no-commit'
 
