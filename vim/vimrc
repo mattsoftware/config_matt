@@ -47,6 +47,8 @@ nnoremap <silent> <F7> :set fileformat=unix<CR>
 " Buffers
 nnoremap <F8> :buffers<CR>:buffer<Space>
 nnoremap <F9> :bn<CR>
+" git gutter hide/show
+nmap <leader>g :GitGutterToggle<CR>
 
 " List invisibles
 set listchars=tab:>\ ,eol:$,trail:.
