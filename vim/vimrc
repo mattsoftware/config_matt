@@ -13,6 +13,7 @@ set number
 " Allow vim to navigate away from unwritten changes in a buffer without
 " warning
 set hidden
+set modelines=1
 
 let mapleader = ";"
 " 'h = help
@@ -65,7 +66,7 @@ map <leader>ev :vsp <C-R>=expand("%:p:h") . "/"<CR>
 map <leader>et :tabedit <C-R>=expand("%:p:h") . "/"<CR>
 
 "colorscheme darkblue
-"
+highlight Visual ctermfg=lightRed ctermbg=black cterm=reverse
 "" au BufNewFile,BufRead *.phtml setf php
 
 
