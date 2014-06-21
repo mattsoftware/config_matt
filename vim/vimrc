@@ -1,63 +1,83 @@
 
-let $VIM='~/.vim/'
+" To reload this file ... :so %
 
-" activate pathogen. Note, must be before any filetype detection commands!
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+let $VIM='~/.vim/'
+let g:vtextwidth_limit = 101
+
+"====[ activate pathogen. Note, must be before any filetype detection commands! ]=========
+    call pathogen#runtime_append_all_bundles()
+    call pathogen#helptags()
 
 set nocompatible
-" syntax on " this is set later if we have colours
-" set hlsearch " this is set later if we have colours
 set autoindent shiftwidth=4 tabstop=4
+set expandtab
 set number
-" Allow vim to navigate away from unwritten changes in a buffer without
-" warning
+" Allow vim to navigate away from unwritten changes in a buffer without warning
 set hidden
-set modelines=1
 
-let mapleader = ";"
-" 'h = help
-nmap <leader>h :echo "h1 h2 hb ht hc he"<CR>
-nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix F8:buffers F9:bn"<CR>
-nmap <leader>h2 :echo "n:number l:invisibles w:whitesapce"<CR>
-nmap <leader>hb :echo "F8:buffers F9:bn ctrl-^:switch bd:close"<CR>
-nmap <leader>he :echo ";e:editwindow ;et:edittab ;es:editsplit ;ev:editvirticalsplit"<CR>
-nmap <leader>ht :echo "gt:advance gT:backwards tabedit:new"
-nmap <leader>hc :echo "changes:list g;:back g,:forward jumps:list ctrl-o:backward ctrl-i:forward"
+"====[ Key mappings ]=========
+    let mapleader = ";"
+    " ;h = help
+    nmap <leader>h :echo "h1 h2 hb ht hc he"<CR>
+    nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix F8:buffers F9:bn"<CR>
+    nmap <leader>h2 :echo "n:number l:invisibles w:whitesapce"<CR>
+    nmap <leader>hb :echo "F8:buffers F9:bn ctrl-^:switch bd:close"<CR>
+    nmap <leader>he :echo ";e:editwindow ;et:edittab ;es:editsplit ;ev:editvirticalsplit"<CR>
+    nmap <leader>ht :echo "gt:advance gT:backwards tabedit:new"
+    nmap <leader>hc :echo "changes:list g;:back g,:forward jumps:list ctrl-o:backward ctrl-i:forward"
 
-" show line numbers
-nmap <leader>n :set number!<CR>
-" show invisibles
-nmap <leader>l :set list!<CR>
-" strip whitespace from end of lines
-nmap <leader>w :call <SID>StripTrailingWhitespaces()<CR>
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
-" indent shortcuts
-"nmap <D-[> <<
-"nmap <D-]> >>
-"vmap <D-[> <gv
-"vmap <D-]> >gv
-"nmap <C-[> <<
-"nmap <C-]> >>
-"vmap <C-[> <gv
-"vmap <C-]> >gv
-" Easy paste toggel
-nnoremap <silent> <F6> :set paste!<CR>
-" Change to unix
-nnoremap <silent> <F7> :set fileformat=unix<CR>
-" Buffers
-nnoremap <F8> :buffers<CR>:buffer<Space>
-nnoremap <F9> :bn<CR>
-" git gutter hide/show
-nmap <leader>g :GitGutterToggle<CR>
+    " show line numbers
+    nmap <leader>n :set number!<CR>
+    " show invisibles
+    nmap <leader>l :set list!<CR>
+    " indent shortcuts
+    "nmap <D-[> <<
+    "nmap <D-]> >>
+    "vmap <D-[> <gv
+    "vmap <D-]> >gv
+    "nmap <C-[> <<
+    "nmap <C-]> >>
+    "vmap <C-[> <gv
+    "vmap <C-]> >gv
+    " Easy paste toggel
+    "nnoremap <silent> <F6> :set paste!<CR>
+    " Change to unix
+    "nnoremap <silent> <F7> :set fileformat=unix<CR>
+    " Buffers
+    nnoremap <F8> :buffers<CR>:buffer<Space>
+    nnoremap <F9> :bn<CR>
+    " git gutter hide/show
+    nmap <leader>g :GitGutterToggle<CR>
 
-" List invisibles
-set listchars=tab:>\ ,eol:$,trail:.
-set listchars=tab:▸\ ,eol:¬,trail:.
-highlight NonText ctermfg=DarkCyan
-highlight SpecialKey ctermfg=DarkCyan
-highlight NonText guifg=#4a4a59
-highlight SpecialKey guifg=#4a4a59
+"====[ Modelines ]====
+    " Check the first/last 5 lines for a modeline
+    set modelines=5
+
+    " if you use set the end of line must be a colon
+    " There must be a space after the comment
+    " For example...
+    "    # vim: set expandtab:
+
+    " Append modeline after last line in buffer.
+    " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX 
+    " files.
+    function! AppendModeline()
+        let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :", &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+        let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+        call append(line("0"), l:modeline)
+    endfunction
+    nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+"====[ Invisibles ]=========
+    "set listchars=tab:>\ ,eol:$,trail:.
+    "set listchars=tab:▸\ ,eol:¬,trail:.
+    "highlight NonText ctermfg=DarkCyan
+    "highlight SpecialKey ctermfg=DarkCyan
+    "highlight NonText guifg=#4a4a59
+    "highlight SpecialKey guifg=#4a4a59
+    exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+    set list
+
 
 " Edit helper
 map <leader>ew :e <C-R>=expand("%:p:h") . "/"<CR>
@@ -67,16 +87,17 @@ map <leader>et :tabedit <C-R>=expand("%:p:h") . "/"<CR>
 
 "colorscheme darkblue
 highlight Visual ctermfg=lightRed ctermbg=black cterm=reverse
+highlight Search ctermfg=lightRed ctermbg=black cterm=reverse
 "" au BufNewFile,BufRead *.phtml setf php
 
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set history=50 " keep 50 lines of command line history
+set ruler " show the cursor position all the time
+set showcmd " display incomplete commands
+set incsearch " do incremental searching
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -86,41 +107,37 @@ endif
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-	syntax on
-	set hlsearch
+    syntax on
+    set hlsearch
 endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
-	" Enable file type detection.
-	" Use the default filetype settings, so that mail gets 'tw' set to 72,
-	" 'cindent' is on in C files, etc.
-	" Also load indent files, to automatically do language-dependent indenting.
-	filetype plugin indent on
+    " Enable file type detection.
+    " Use the default filetype settings, so that mail gets 'tw' set to 72,
+    " 'cindent' is on in C files, etc.
+    " Also load indent files, to automatically do language-dependent indenting.
+    filetype plugin indent on
 
-	" Put these in an autocmd group, so that we can delete them easily.
-	augroup vimrcEx
-		au!
+    " Put these in an autocmd group, so that we can delete them easily.
+    augroup vimrcEx
+        au!
 
-		" For all text files set 'textwidth' to 78 characters.
-		autocmd FileType text setlocal textwidth=78
+        " For all text files set 'textwidth' to 78 characters.
+        "autocmd FileType text setlocal textwidth=10
 
-		" When editing a file, always jump to the last known cursor position.
-		" Don't do it when the position is invalid or when inside an event handler
-		" (happens when dropping a file on gvim).
-		" Also don't do it when the mark is in the first line, that is the default
-		" position when opening a file.
-		autocmd BufReadPost *
-					\ if line("'\"") > 1 && line("'\"") <= line("$") |
-					\   exe "normal! g`\"" |
-					\ endif
+        " When editing a file, always jump to the last known cursor position.
+        " Don't do it when the position is invalid or when inside an event 
+        " handler (happens when dropping a file on gvim).
+        " Also don't do it when the mark is in the first line, that is the 
+        " default position when opening a file.
+        autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
 
-	augroup END
-
-else
-
-	set autoindent		" always set autoindenting on
+    augroup END
 
 endif " has("autocmd")
 
@@ -128,21 +145,74 @@ endif " has("autocmd")
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(":DiffOrig")
-	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-				\ | wincmd p | diffthis
+    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 endif
 
+"====[ Strip whitespace from end of lines ]====
+
+    nmap <leader>w :call <SID>StripTrailingWhitespaces()<CR>
+    nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+
+    function! <SID>StripTrailingWhitespaces()
+        " Preparation: save last search, and cursor position
+        let _s=@/
+        let l = line(".")
+        let c = col(".")
+        " Do the business:
+        %s/\s\+$//e
+        " Clean up: restore previous search history, and cursor position
+        let @/=_s
+        call cursor(l, c)
+    endfunction
+
+"====[ Make the (vtextwidth)th column stand out ]====================
+    highlight ColorColumn ctermbg=magenta
+    call matchadd('ColorColumn', '\%'.(g:vtextwidth_limit).'v', 100)
+
+"=====[ Highlight matches when jumping to next ]=============
+
+    " This rewires n and N to do the highlighing...
+    nnoremap <silent> n   n:call HLNext(0.4)<cr>
+    nnoremap <silent> N   N:call HLNext(0.4)<cr>
+    highlight WhiteOnRed ctermbg=red ctermfg=white
+
+    function! HLNext (blinktime)
+        let [bufnum, lnum, col, off] = getpos('.')
+        let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+        let target_pat = '\c\%#'.@/
+        let ring = matchadd('WhiteOnRed', target_pat, 101)
+        redraw
+        exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+        call matchdelete(ring)
+        redraw
+    endfunction
+
+"====[ Always turn on syntax highlighting for diffs ]=========================
+
+    " EITHER select by the file-suffix directly...
+    augroup PatchDiffHighlight
+        autocmd!
+        autocmd BufEnter  *.patch,*.rej,*.diff   syntax enable
+    augroup END
+
+    " OR ELSE use the filetype mechanism to select automatically...
+    filetype on
+    augroup PatchDiffHighlight
+        autocmd!
+        autocmd FileType  diff   syntax enable
+    augroup END
 
 
-function! <SID>StripTrailingWhitespaces()
-	" Preparation: save last search, and cursor position
-	let _s=@/
-	let l = line(".")
-	let c = col(".")
-	" Do the business:
-	%s/\s\+$//e
-	" Clean up: restore previous search history, and cursor position
-	let @/=_s
-	call cursor(l, c)
-endfunction
+"====[ Open any file with a pre-existing swapfile in readonly mode ]=========
+
+    augroup NoSimultaneousEdits
+        autocmd!
+        autocmd SwapExists * let v:swapchoice = 'o'
+        autocmd SwapExists * echomsg ErrorMsg
+        autocmd SwapExists * echo 'Duplicate edit session (readonly)'
+        autocmd SwapExists * echohl None
+        autocmd SwapExists * sleep 2
+    augroup END
+
+    " Also consider the autoswap_mac.vim plugin (but beware its limitations)
 
