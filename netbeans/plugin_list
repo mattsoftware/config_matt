@@ -1,0 +1,9 @@
+Jira
+show path in title
+	http://plugins.netbeans.org/plugin/42000/show-path-in-title
+show and change line endings
+	http://plugins.netbeans.org/plugin/36810/show-and-change-line-endings
+
+vagrant
+show current git branch in statusbar
+
