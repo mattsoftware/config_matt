@@ -48,6 +48,12 @@ set hidden
     nnoremap <F9> :bn<CR>
     " git gutter hide/show
     nmap <leader>g :GitGutterToggle<CR>
+    "nmap ]c <Plug>GitGutterNextHunk
+    "nmap [c <Plug>GitGutterPrevHunk
+    "nmap <Leader>ga <Plug>GitGutterStageHunk
+    "nmap <Leader>gr <Plug>GitGutterRevertHunk
+    "nmap <Leader>gv <Plug>GitGutterPreviewHunk
+    "nmap <Leader>gd <Plug>GitGutterDebug
 
 "====[ Modelines ]====
     " Check the first/last 5 lines for a modeline
