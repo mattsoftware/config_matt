@@ -14,6 +14,7 @@ set expandtab
 set number
 " Allow vim to navigate away from unwritten changes in a buffer without warning
 set hidden
+set scrolloff=999
 
 "====[ Key mappings ]=========
     let mapleader = ";"
@@ -46,14 +47,29 @@ set hidden
     " Buffers
     nnoremap <F8> :buffers<CR>:buffer<Space>
     nnoremap <F9> :bn<CR>
+
+"====[ Git Gutter ]====
     " git gutter hide/show
-    nmap <leader>g :GitGutterToggle<CR>
-    "nmap ]c <Plug>GitGutterNextHunk
-    "nmap [c <Plug>GitGutterPrevHunk
-    "nmap <Leader>ga <Plug>GitGutterStageHunk
-    "nmap <Leader>gr <Plug>GitGutterRevertHunk
-    "nmap <Leader>gv <Plug>GitGutterPreviewHunk
-    "nmap <Leader>gd <Plug>GitGutterDebug
+    nmap <leader>gt :GitGutterToggle<CR>
+    nmap ]g <Plug>GitGutterNextHunk
+    nmap [g <Plug>GitGutterPrevHunk
+    nmap <Leader>ga <Plug>GitGutterStageHunk
+    nmap <Leader>gr <Plug>GitGutterRevertHunk
+    nmap <Leader>gv <Plug>GitGutterPreviewHunk
+    nmap <Leader>gd <Plug>GitGutterDebug
+    " let g:gitgutter_sign_added = 'xx'
+    " let g:gitgutter_sign_modified = 'yy'
+    " let g:gitgutter_sign_removed = 'zz'
+    " let g:gitgutter_sign_removed_first_line = '^^'
+    " let g:gitgutter_sign_modified_removed = 'ww'
+    execute "highlight GitGutterAdd guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE"
+    execute "highlight GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE"
+    execute "highlight GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE"
+
+"====[ NERD Tree (git) ]====
+    nmap <leader>t :NERDTreeToggle<CR>
+    let g:NERDTreeUseSimpleIndicator = 1
+    map <C-n> :NERDTreeToggle<CR>
 
 "====[ Modelines ]====
     " Check the first/last 5 lines for a modeline
@@ -155,7 +171,6 @@ if !exists(":DiffOrig")
 endif
 
 "====[ Strip whitespace from end of lines ]====
-
     nmap <leader>w :call <SID>StripTrailingWhitespaces()<CR>
     nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
@@ -176,7 +191,6 @@ endif
     call matchadd('ColorColumn', '\%'.(g:vtextwidth_limit).'v', 100)
 
 "=====[ Highlight matches when jumping to next ]=============
-
     " This rewires n and N to do the highlighing...
     nnoremap <silent> n   n:call HLNext(0.4)<cr>
     nnoremap <silent> N   N:call HLNext(0.4)<cr>
@@ -194,7 +208,6 @@ endif
     endfunction
 
 "====[ Always turn on syntax highlighting for diffs ]=========================
-
     " EITHER select by the file-suffix directly...
     augroup PatchDiffHighlight
         autocmd!
@@ -208,9 +221,7 @@ endif
         autocmd FileType  diff   syntax enable
     augroup END
 
-
 "====[ Open any file with a pre-existing swapfile in readonly mode ]=========
-
     augroup NoSimultaneousEdits
         autocmd!
         autocmd SwapExists * let v:swapchoice = 'o'
@@ -221,4 +232,7 @@ endif
     augroup END
 
     " Also consider the autoswap_mac.vim plugin (but beware its limitations)
+
+"====[ Add support for arduino ]====
+    autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 
