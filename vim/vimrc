@@ -81,7 +81,7 @@ set scrolloff=999
     "    # vim: set expandtab:
 
     " Append modeline after last line in buffer.
-    " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX 
+    " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
     " files.
     function! AppendModeline()
         let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :", &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
@@ -123,7 +123,7 @@ set incsearch " do incremental searching
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
-	set mouse=a
+    set mouse=a
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
@@ -150,9 +150,9 @@ if has("autocmd")
         "autocmd FileType text setlocal textwidth=10
 
         " When editing a file, always jump to the last known cursor position.
-        " Don't do it when the position is invalid or when inside an event 
+        " Don't do it when the position is invalid or when inside an event
         " handler (happens when dropping a file on gvim).
-        " Also don't do it when the mark is in the first line, that is the 
+        " Also don't do it when the mark is in the first line, that is the
         " default position when opening a file.
         autocmd BufReadPost *
         \ if line("'\"") > 1 && line("'\"") <= line("$") |
