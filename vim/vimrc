@@ -188,7 +188,9 @@ endif
 
 "====[ Make the (vtextwidth)th column stand out ]====================
     highlight ColorColumn ctermbg=magenta
-    call matchadd('ColorColumn', '\%'.(g:vtextwidth_limit).'v', 100)
+    if exists("matchadd")
+        call matchadd('ColorColumn', '\%'.(g:vtextwidth_limit).'v', 100)
+    endif
 
 "=====[ Highlight matches when jumping to next ]=============
     " This rewires n and N to do the highlighing...
@@ -200,7 +202,9 @@ endif
         let [bufnum, lnum, col, off] = getpos('.')
         let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
         let target_pat = '\c\%#'.@/
-        let ring = matchadd('WhiteOnRed', target_pat, 101)
+        if exists("matchadd")
+            let ring = matchadd('WhiteOnRed', target_pat, 101)
+        endif
         redraw
         exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
         call matchdelete(ring)
