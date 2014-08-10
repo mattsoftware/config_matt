@@ -9,7 +9,8 @@ let g:vtextwidth_limit = 101
     call pathogen#helptags()
 
 set nocompatible
-set autoindent shiftwidth=4 tabstop=4
+" good idea to keep tabstop, shiftwidth and softtabstop the same value
+set autoindent tabstop=4 shiftwidth=4 softtabstop=4
 set expandtab
 set number
 " Allow vim to navigate away from unwritten changes in a buffer without warning
@@ -22,10 +23,11 @@ set scrolloff=999
     nmap <leader>h :echo "h1 h2 hb ht hc he"<CR>
     nmap <leader>h1 :echo "F3:help F5:whitespace F6:paste F7:unix F8:buffers F9:bn"<CR>
     nmap <leader>h2 :echo "n:number l:invisibles w:whitesapce"<CR>
-    nmap <leader>hb :echo "F8:buffers F9:bn ctrl-^:switch bd:close"<CR>
+    nmap <leader>hb :echo "F8:buffers(ls) F9:next(bn) ctrl-^:switch bd:close bp:previous"<CR>
     nmap <leader>he :echo ";e:editwindow ;et:edittab ;es:editsplit ;ev:editvirticalsplit"<CR>
-    nmap <leader>ht :echo "gt:advance gT:backwards tabedit:new"
-    nmap <leader>hc :echo "changes:list g;:back g,:forward jumps:list ctrl-o:backward ctrl-i:forward"
+    nmap <leader>ht :echo "gt:advance gT:backwards tabedit:new"<CR>
+    nmap <leader>hc :echo "changes:list g;:back g,:forward jumps:list ctrl-o:backward ctrl-i:forward"<CR>
+    nmap <leader>hw :echo "ctrl-w s:split(sp) v:vertical(vsp) :on:only w:cycle +/-/=/_/\|:size r/R:rotate x:exchange HJKL:move T:tabedit"<CR>
 
     " show line numbers
     nmap <leader>n :set number!<CR>
@@ -47,12 +49,24 @@ set scrolloff=999
     " Buffers
     nnoremap <F8> :buffers<CR>:buffer<Space>
     nnoremap <F9> :bn<CR>
+    " Windows
+    map <C-h> <C-w>h
+    map <C-j> <C-w>j
+    map <C-k> <C-w>k
+    map <C-l> <C-w>l
+    " Tabs
+    "map <D-S-]> gt
+    "map <D-S-[> gT
+    "map ’ gt
+    "map ” gT
 
 "====[ Git Gutter ]====
     " git gutter hide/show
     nmap <leader>gt :GitGutterToggle<CR>
     nmap ]g <Plug>GitGutterNextHunk
     nmap [g <Plug>GitGutterPrevHunk
+    nmap <Leader>gn <Plug>GitGutterNextHunk
+    nmap <Leader>gp <Plug>GitGutterPrevHunk
     nmap <Leader>ga <Plug>GitGutterStageHunk
     nmap <Leader>gr <Plug>GitGutterRevertHunk
     nmap <Leader>gv <Plug>GitGutterPreviewHunk
@@ -91,10 +105,14 @@ set scrolloff=999
     nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 "====[ Invisibles ]=========
+    "ctrl-v u00ac == not sign
+    "ctrl-v u25b8 == triangle sign
+    "ctrl-v ctrl-i == tab
     "set listchars=tab:>\ ,eol:$,trail:.
     "set listchars=tab:▸\ ,eol:¬,trail:.
-    "highlight NonText ctermfg=DarkCyan
-    "highlight SpecialKey ctermfg=DarkCyan
+    "SpecialKey = tab characters
+    highlight NonText ctermfg=darkGrey
+    highlight SpecialKey ctermfg=darkGrey
     "highlight NonText guifg=#4a4a59
     "highlight SpecialKey guifg=#4a4a59
     exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
@@ -207,7 +225,9 @@ endif
         endif
         redraw
         exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-        call matchdelete(ring)
+        if exists("matchadd")
+            call matchdelete(ring)
+        endif
         redraw
     endfunction
 
@@ -240,3 +260,6 @@ endif
 "====[ Add support for arduino ]====
     autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 
+autocmd FileType gitconfig setlocal tabstop=4 noexpandtab shiftwidth=4
+autocmd FileType gitconfig setlocal listchars=tab:\ \ 
+"autocmd BufNewFile,BufRead *.rss,*.atom setfiletype xml
