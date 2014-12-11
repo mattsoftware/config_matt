@@ -15,6 +15,7 @@ set expandtab
 set number
 " Allow vim to navigate away from unwritten changes in a buffer without warning
 set hidden
+" Keep the cursor in the center of the display where possible
 set scrolloff=999
 set ruler
 "set cursorcolumn
