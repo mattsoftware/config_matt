@@ -16,6 +16,15 @@ set number
 " Allow vim to navigate away from unwritten changes in a buffer without warning
 set hidden
 set scrolloff=999
+set ruler
+"set cursorcolumn
+
+"====[ Undo ]====
+if has('persistent_undo')
+    set undofile
+    set undodir=$HOME/.vim_undofiles
+    set undolevels=5000
+endif
 
 "====[ Key mappings ]=========
     let mapleader = ";"
@@ -246,14 +255,14 @@ endif
     augroup END
 
 "====[ Open any file with a pre-existing swapfile in readonly mode ]=========
-    augroup NoSimultaneousEdits
-        autocmd!
-        autocmd SwapExists * let v:swapchoice = 'o'
-        autocmd SwapExists * echomsg ErrorMsg
-        autocmd SwapExists * echo 'Duplicate edit session (readonly)'
-        autocmd SwapExists * echohl None
-        autocmd SwapExists * sleep 2
-    augroup END
+    "augroup NoSimultaneousEdits
+    "    autocmd!
+    "    autocmd SwapExists * let v:swapchoice = 'o'
+    "    autocmd SwapExists * echomsg ErrorMsg
+    "    autocmd SwapExists * echo 'Duplicate edit session (readonly)'
+    "    autocmd SwapExists * echohl None
+    "    autocmd SwapExists * sleep 2
+    "augroup END
 
     " Also consider the autoswap_mac.vim plugin (but beware its limitations)
 
