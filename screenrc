@@ -30,5 +30,5 @@ hardstatus alwayslastline
 # %m      : current month (0-padded; %M for "Jan" etc.)
 # -       : hyphen character
 # %d      : current date (0-padded)
-hardstatus string "%{= KW} %H [%`] %{= Kw}|%{-} %-Lw%{= bW}%n%f %t%{-}%+Lw %=%c %d-%M-%Y"
+hardstatus string "%{= KW} %H %{= Kw}|%{-} %-Lw%{= bW}%n%f %t%{-}%+Lw %=%c %d-%M-%Y"
 
