@@ -25,3 +25,6 @@
 [submodule "vim/bundle/php.vim"]
 	path = vim/bundle/php.vim
 	url = https://github.com/vim-scripts/php.vim--Hodge.git
+[submodule "vim/bundle/vim-hack"]
+	path = vim/bundle/vim-hack
+	url = git://github.com/hhvm/vim-hack.git
