@@ -44,6 +44,9 @@ fileAppend ~/.bash_profile "[[ -f ~/.bash_profile_ext ]] && . ~/.bash_profile_ex
 createLink `pwd`/vim ~/.vim
 createLink `pwd`/vim/vimrc ~/.vimrc
 
+# .screenrc
+createLink `pwd`/screenrc ~/.screenrc
+
 # initialize the submodules
 OIFS="$IFS"
 IFS=$'\n'
