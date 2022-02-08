@@ -1,5 +1,5 @@
 
-: ${CONFIG_MATT:="$HOME/config_matt"}
+: ${CONFIG_MATT:="$HOME/.config_matt"}
 
 # Mac's run this on every terminal instance - very annoying!
 if [[ $(uname) != 'Darwin' ]]; then

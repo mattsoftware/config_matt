@@ -35,10 +35,10 @@ function fileAppend() {
 }
 
 # .bash_ext
-createLink `pwd`/bashrc_ext ~/.bashrc_ext
-createLink `pwd`/bash_profile_ext ~/.bash_profile_ext
-fileAppend ~/.bashrc "[[ -f ~/.bashrc_ext ]] && . ~/.bashrc_ext"
-fileAppend ~/.bash_profile "[[ -f ~/.bash_profile_ext ]] && . ~/.bash_profile_ext"
+createLink `pwd`/bashrc_matt ~/.bashrc_matt
+createLink `pwd`/bash_profile_matt ~/.bash_profile_matt
+fileAppend ~/.bashrc "[[ -f ~/.bashrc_matt ]] && . ~/.bashrc_matt"
+fileAppend ~/.bash_profile "[[ -f ~/.bash_profile_matt ]] && . ~/.bash_profile_matt"
 
 # .vim and .vimrc
 createLink `pwd`/vim ~/.vim
