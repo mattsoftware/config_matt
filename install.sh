@@ -40,10 +40,6 @@ createLink `pwd`/bash_profile_matt ~/.bash_profile_matt
 fileAppend ~/.bashrc "[[ -f ~/.bashrc_matt ]] && . ~/.bashrc_matt"
 fileAppend ~/.bash_profile "[[ -f ~/.bash_profile_matt ]] && . ~/.bash_profile_matt"
 
-# .vim and .vimrc
-createLink `pwd`/vim ~/.vim
-createLink `pwd`/vim/vimrc ~/.vimrc
-
 # .screenrc
 createLink `pwd`/screenrc ~/.screenrc
 
